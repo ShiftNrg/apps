@@ -7,7 +7,7 @@ import { UnappliedSlash } from '@polkadot/types/interfaces';
 import { ValidatorInfo } from '../types';
 
 import BN from 'bn.js';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { ApiPromise } from '@polkadot/api';
 import { AddressSmall, Badge, Checkbox, Icon } from '@polkadot/react-components';
 import { checkVisibility } from '@polkadot/react-components/util';
@@ -31,11 +31,6 @@ interface Props {
   toggleSelected: (accountId: string) => void;
   withElected: boolean;
   withIdentity: boolean;
-}
-
-interface Slash {
-  era: BN;
-  slashes: UnappliedSlash[];
 }
 
 function checkIdentity (api: ApiPromise, accountInfo: DeriveAccountInfo): boolean {
@@ -62,26 +57,24 @@ function Validator ({ allSlashes, canSelect, filterName, info, isNominated, isSe
   const { t } = useTranslation();
   const { api } = useApi();
   const accountInfo = useCall<DeriveAccountInfo>(api.derive.accounts.info, [info.accountId]);
-  const [isVisible, setVisibility] = useState(true);
-  const [slashes, setSlashes] = useState<Slash[]>([]);
 
   useEffect((): void => {
     if (accountInfo) {
       info.hasIdentity = checkIdentity(api, accountInfo);
-      setVisibility(checkVisibility(api, info.key, accountInfo, filterName, withIdentity));
     }
-  }, [accountInfo, api, filterName, info, withIdentity]);
+  }, [api, accountInfo, info]);
 
-  useEffect((): void => {
-    allSlashes && setSlashes(
-      allSlashes
-        .map(([era, slashes]) => ({
-          era,
-          slashes: slashes.filter(({ validator }) => validator.eq(info.accountId))
-        }))
-        .filter(({ slashes }) => slashes.length)
-    );
-  }, [allSlashes, info]);
+  const isVisible = useMemo(
+    () => accountInfo ? checkVisibility(api, info.key, accountInfo, filterName, withIdentity) : true,
+    [accountInfo, api, filterName, info, withIdentity]
+  );
+
+  const slashes = useMemo(
+    () => (allSlashes || [])
+      .map(([era, all]) => ({ era, slashes: all.filter(({ validator }) => validator.eq(info.accountId)) }))
+      .filter(({ slashes }) => slashes.length),
+    [allSlashes, info]
+  );
 
   const _onQueryStats = useCallback(
     (): void => {
@@ -144,7 +137,7 @@ function Validator ({ allSlashes, canSelect, filterName, info, isNominated, isSe
       <td className='address all'>
         <AddressSmall value={accountId} />
       </td>
-      <td className='number ui--media-1200'>{numNominators || ''}</td>
+      <td className='number media--1200'>{numNominators || ''}</td>
       <td className='number'>
         {
           isCommission
@@ -154,7 +147,7 @@ function Validator ({ allSlashes, canSelect, filterName, info, isNominated, isSe
       </td>
       <td className='number together'>{!bondTotal.isZero() && <FormatBalance value={bondTotal} />}</td>
       <td className='number together'>{!bondOwn.isZero() && <FormatBalance value={bondOwn} />}</td>
-      <td className='number together ui--media-1600'>{!bondOther.isZero() && <FormatBalance value={bondOther} />}</td>
+      <td className='number together media--1600'>{!bondOther.isZero() && <FormatBalance value={bondOther} />}</td>
       <td className='number together'>{!rewardPayout.isZero() && <FormatBalance value={rewardPayout} />}</td>
       <td>
         {(canSelect || isSelected) && (

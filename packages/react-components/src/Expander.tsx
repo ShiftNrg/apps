@@ -4,6 +4,7 @@
 
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import { LabelHelp } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 import { Text } from '@polkadot/types';
 
@@ -17,6 +18,7 @@ interface Meta {
 export interface Props {
   children?: React.ReactNode;
   className?: string;
+  help?: string;
   isOpen?: boolean;
   summary?: React.ReactNode;
   summaryMeta?: Meta;
@@ -40,7 +42,7 @@ function formatMeta (meta?: Meta): React.ReactNode | null {
   ).join(' ');
 }
 
-function Expander ({ children, className = '', isOpen, summary, summaryMeta, summarySub, withDot, withHidden }: Props): React.ReactElement<Props> {
+function Expander ({ children, className = '', help, isOpen, summary, summaryMeta, summarySub, withDot, withHidden }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isExpanded, toggleExpanded] = useToggle(isOpen);
   const headerMain = useMemo(
@@ -63,6 +65,7 @@ function Expander ({ children, className = '', isOpen, summary, summaryMeta, sum
         onClick={toggleExpanded}
       >
         <div className='ui--Expander-summary-header'>
+          {help && <LabelHelp help={help}/>}
           {hasContent
             ? <Icon icon={isExpanded ? 'angle-double-down' : 'angle-double-right'} />
             : withDot
@@ -104,11 +107,11 @@ export default React.memo(styled(Expander)`
 
   .ui--Expander-summary {
     margin: 0;
-    min-width: 12.5rem;
+    min-width: 13.5rem;
     overflow: hidden;
 
     .ui--Expander-summary-header > .ui--FormatBalance {
-      min-width: 10rem;
+      min-width: 11rem;
     }
 
     > div {
@@ -123,7 +126,6 @@ export default React.memo(styled(Expander)`
     .ui--Expander-summary-sub {
       font-size: 1rem;
       opacity: 0.6;
-      padding-left: 1.75rem;
     }
   }
 `);
