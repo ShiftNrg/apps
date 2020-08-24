@@ -29,7 +29,7 @@ export default {
   'mashnet-node': kilt,
   'node-template': nodeTemplate,
   'nodle-chain': nodle,
-  'shiftNrg-node': shiftNrg,
+  'shift-node': shiftNrg,
   'stable-poc': stablePoc,
   stable_poc: stablePoc
 };

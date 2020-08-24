@@ -47,7 +47,7 @@ const nodeColors: Record<string, any> = [
   ['edgeware node', nodeEdgeware],
   ['kilt node', nodeKilt],
   ['nodle chain node', nodeNodle],
-  ['NRG-TN-01', nodeShiftNrg]
+  ['shift node', nodeShiftNrg]
   // ['node template', emptyColor],
   // ['parity polkadot', emptyColor],
   // ['substrate node', emptyColor]

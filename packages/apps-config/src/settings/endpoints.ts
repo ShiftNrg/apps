@@ -165,7 +165,7 @@ function createTest (t: TFunction): LinkOption[] {
     },
     {
       info: 'shiftNrg',
-      text: t<string>('rpc.shiftNrg', 'ShiftNrg (Shift Testnet, hosted by Pactum IO)', { ns: 'apps-config' }),
+      text: t<string>('rpc.shiftNrg', 'ShiftNrg (ShiftNrg Testnet, hosted by Pactum IO)', { ns: 'apps-config' }),
       value: 'wss://node.shiftnrg.dev:443'
     },
     {

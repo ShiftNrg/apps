@@ -62,7 +62,7 @@ const nodeLogos: Record<string, any> = [
   ['Nodle Chain Node', nodeNodle],
   ['parity-polkadot', nodePolkadot],
   ['polkadot-js', nodePolkadotJs],
-  ['NRG-TN-01', nodeShiftNrg],
+  ['shift-node', nodeShiftNrg],
   ['substrate-node', nodeSubstrate]
 ].reduce((logos, [node, logo]): Record<string, any> => ({
   ...logos,
