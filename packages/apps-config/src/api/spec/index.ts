@@ -13,6 +13,7 @@ import kilt from './kilt';
 import kulupu from './kulupu';
 import nodeTemplate from './node-template';
 import nodle from './nodle';
+import shiftNrg from './shiftNrg';
 import stablePoc from './stable-poc';
 
 export default {
@@ -28,6 +29,7 @@ export default {
   'mashnet-node': kilt,
   'node-template': nodeTemplate,
   'nodle-chain': nodle,
+  'shiftNrg-node': shiftNrg,
   'stable-poc': stablePoc,
   stable_poc: stablePoc
 };
