@@ -164,6 +164,11 @@ function createTest (t: TFunction): LinkOption[] {
       value: 'wss://beresheet1.edgewa.re'
     },
     {
+      info: 'shiftNrg',
+      text: t<string>('rpc.shiftNrg', 'ShiftNrg (Shift Testnet, hosted by Pactum IO)', { ns: 'apps-config' }),
+      value: 'wss://node.shiftnrg.dev:443'
+    },
+    {
       info: 'substrate',
       text: t<string>('rpc.flamingfir', 'Flaming Fir (Substrate Testnet, hosted by Parity)', { ns: 'apps-config' }),
       value: 'wss://substrate-rpc.parity.io'

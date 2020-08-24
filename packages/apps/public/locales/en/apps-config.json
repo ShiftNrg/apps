@@ -14,6 +14,7 @@
   "rpc.kusama.w3f": "Kusama (Polkadot Canary, hosted by Web3 Foundation)",
   "rpc.local": "Local Node (Own, 127.0.0.1:9944)",
   "rpc.mandala": "Mandala (Acala Testnet, hosted by Acala)",
+  "rpc.shiftNrg": "ShiftNrg (Shift Testnet, hosted by Pactum IO)",
   "rpc.nodle-arcadia": "Arcadia (Nodle Testnet, hosted by Nodle)",
   "rpc.westend": "Westend (Polkadot Testnet, hosted by Parity)",
   "ss58.centrifuge": "Centrifuge (live)",
