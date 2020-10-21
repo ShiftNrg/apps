@@ -1,6 +1,5 @@
 // Copyright 2017-2020 @polkadot/app-settings authors & contributors
-// This software may be modified and distributed under the terms
-// of the Apache-2.0 license. See the LICENSE file for details.
+// SPDX-License-Identifier: Apache-2.0
 
 import { AppProps as Props } from '@polkadot/react-components/types';
 
@@ -46,7 +45,9 @@ function SettingsApp ({ basePath, onStatusChange }: Props): React.ReactElement<P
   ], [numExtensions, t]);
 
   const hidden = useMemo(
-    () => (isApiConnected && isApiReady) ? [] : ['metadata', 'i18n'],
+    () => (isApiConnected && isApiReady)
+      ? []
+      : ['metadata', 'i18n'],
     [isApiConnected, isApiReady]
   );
 

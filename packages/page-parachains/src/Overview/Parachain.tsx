@@ -1,6 +1,5 @@
 // Copyright 2017-2020 @polkadot/app-parachains authors & contributors
-// This software may be modified and distributed under the terms
-// of the Apache-2.0 license. See the LICENSE file for details.
+// SPDX-License-Identifier: Apache-2.0
 
 import { HeadData } from '@polkadot/types/interfaces';
 import { DeriveParachain } from '@polkadot/api-derive/types';
@@ -13,7 +12,6 @@ import { useApi, useCall } from '@polkadot/react-hooks';
 import { Option } from '@polkadot/types';
 import { formatNumber } from '@polkadot/util';
 
-import ParachainInfo from '../ParachainInfo';
 import { useTranslation } from '../translate';
 
 interface Props {
@@ -26,7 +24,7 @@ const transformHead = {
     if (headData.isSome) {
       const hex = headData.unwrap().toHex();
 
-      return `${hex.slice(0, 10)}…${hex.slice(-8)}`;
+      return `${hex.slice(0, 18)}…${hex.slice(-16)}`;
     }
 
     return null;
@@ -72,10 +70,7 @@ function Parachain ({ className = '', parachain: { didUpdate, id, info, pendingS
           />
         </div>
       </td>
-      <td className='all info'>
-        <ParachainInfo info={info} />
-      </td>
-      <td className='start together headhex'>{headHex}</td>
+      <td className='all start together headhex'>{headHex}</td>
       <td className='number pending-swap-id media--800'>
         {pendingSwapId?.toString()}
       </td>
